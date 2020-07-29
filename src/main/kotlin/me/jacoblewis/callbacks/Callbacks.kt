@@ -4,6 +4,9 @@ import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executors
 
 
+/**
+ * Setup the orders here
+ */
 fun main() {
     val fred = Barista("Fred")
     val sam = Barista("Sam")
@@ -12,6 +15,11 @@ fun main() {
     sam.acceptOrder(CoffeeType.AMERICANO)
 }
 
+/**
+ * A Barista can accept Coffee Type orders
+ *
+ * @param name: The name of the Barista
+ */
 class Barista(val name: String) {
     private val coffeeMaker = CoffeeMaker()
 
@@ -22,14 +30,23 @@ class Barista(val name: String) {
     }
 }
 
-
+/**
+ * The Roast of the Coffee
+ */
 enum class CoffeeRoast {
     LIGHT,
     MEDIUM,
     DARK
 }
 
+/**
+ * The Carrier Object for the finished order
+ */
 data class Coffee(val type: CoffeeType)
+
+/**
+ * The device that will emulate time passing
+ */
 class CoffeeMaker {
     fun brewCoffee(type: CoffeeType, onBrewed: Coffee.() -> Unit) {
         delay(type.brewTime) { // Simulates time to make coffee (ASYNC)
@@ -39,6 +56,11 @@ class CoffeeMaker {
     }
 }
 
+/**
+ * The Coffee Type
+ *
+ * @param brewTime: emulates time
+ */
 enum class CoffeeType(val brewTime: Long) {
     AMERICANO(300L),
     CAPPUCCINO(950L),
@@ -47,10 +69,20 @@ enum class CoffeeType(val brewTime: Long) {
     LATTE(875L)
 }
 
+/**
+ * Emulate a delay by blocking the main thread.
+ *
+ * Warning: Never use this (lol)
+ */
 fun delay(time: Long) {
     Thread.sleep(time)
 }
 
+/**
+ * Emulate a delay using threads.
+ *
+ * Warning: This is really just as an example.
+ */
 fun delay(time: Long, complete: () -> Unit) {
     val completableFuture = CompletableFuture<String>()
     Executors.newCachedThreadPool().submit<Any?> {
