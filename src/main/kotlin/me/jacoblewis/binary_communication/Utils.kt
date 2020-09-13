@@ -14,3 +14,6 @@ val ByteArray.asBinary: String
         }
         "$u$l"
     }
+
+val Byte.asInt: Int
+    get() = toUByte().toInt()
