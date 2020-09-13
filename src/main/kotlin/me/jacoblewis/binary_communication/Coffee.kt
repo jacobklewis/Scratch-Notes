@@ -7,24 +7,26 @@ data class Coffee(
     val milk: Milk                  // 2 options                - 1 bit
 ) {
 
+    // 000 00 00 0
+
+
     companion object {
         fun ByteArray.decode(): Coffee {
             val rawData = this[0].asInt
-            val milk = Milk.values()[rawData and 0x01]
-            val size = Size.values()[(rawData ushr 1) and 0x03]
-            val roast = CoffeeRoast.values()[(rawData ushr 3) and 0x03]
-            val type = CoffeeType.values()[(rawData ushr 5) and 0x07]
+            val milk = Milk.values()[rawData and 0b1]
+            val size = Size.values()[(rawData ushr 1) and 0b11]
+            val roast = CoffeeRoast.values()[(rawData ushr 3) and 0b11]
+            val type = CoffeeType.values()[(rawData ushr 5) and 0b111]
             return Coffee(type, roast, size, milk)
         }
 
         fun Coffee.encode(): ByteArray {
-            var rawData = 0
-            rawData = (rawData or type.ordinal) shl 2
-            rawData = (rawData or roast.ordinal) shl 2
-            rawData = (rawData or size.ordinal) shl 1
-            rawData = rawData or milk.ordinal
-
-            return byteArrayOf(rawData.toByte())
+            var raw = 0
+            raw = (raw or this.type.ordinal) shl 2 // 000x xx00
+            raw = (raw or this.roast.ordinal) shl 2 // 0xxx aa00
+            raw = (raw or this.size.ordinal) shl 1 // xxxa abb0
+            raw = raw or this.milk.ordinal // xxxa abbc
+            return byteArrayOf(raw.toByte())
         }
     }
 

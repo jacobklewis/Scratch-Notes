@@ -6,10 +6,10 @@ import me.jacoblewis.binary_communication.Coffee.Companion.encode
 fun main() {
 
     val coffee = Coffee(
-        Coffee.CoffeeType.LATTE,
-        Coffee.CoffeeRoast.DARK,
-        Coffee.Size.TINY,
-        Coffee.Milk.TWO_PERCENT
+        Coffee.CoffeeType.DRIP,
+        Coffee.CoffeeRoast.MEDIUM,
+        Coffee.Size.MEDIUM,
+        Coffee.Milk.NONE
     )
     val encodedCoffee = coffee.encode()
 
