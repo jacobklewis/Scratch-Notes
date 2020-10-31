@@ -2,10 +2,6 @@ package me.jacoblewis.inline
 
 fun main() {
 
-    compareInts2(5, 7, { _, _ -> true }) {
-        println(it)
-    }
-
     compareInts2(98, 34, { a, b -> a * b % 2 == 0 }) {
         println(it)
     }

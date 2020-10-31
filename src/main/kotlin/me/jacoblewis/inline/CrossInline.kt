@@ -6,10 +6,6 @@ fun main() {
         println(it)
     }
 
-    compareInts(5, 7) {
-        println(it)
-    }
-
 }
 
 inline fun compareInts(a: Int, b: Int, crossinline response: (String) -> Unit) {
