@@ -10,9 +10,9 @@ fun main() {
     println("~f1': ${f1.dx(7.0)}")
 }
 
-val f1 = { x: Double -> x * x + cos(2 * x) }
+val f1 = { x: Double -> x * x }
 
-val f1p = { x: Double -> 2 * x - 2 * sin(2 * x) }
+val f1p = { x: Double -> 2 * x }
 
 
 const val DIFF = 0.0000001
