@@ -16,9 +16,9 @@ val Int.asBin: String
             (n xor 0x7fffffff) + n == 0x7fffffff -> 31
             else -> 0
         }
-        return (maxNum downTo 0).fold("") { acc, i ->
-            acc + (if ((n ushr i) and 1 == 1) "1" else "0") + if (i % 4 == 0 && i != 0) " " else ""
-        }
+        return (maxBit downTo 0).map { if ((n ushr it) and 1 == 1) "1" else "0" }
+            .chunked(4) { it.joinToString("") }
+            .joinToString(" ")
     }
 
 val Int.asHex: String
